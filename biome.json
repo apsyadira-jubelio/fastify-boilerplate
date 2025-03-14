@@ -29,8 +29,7 @@
         "noEmptyTypeParameters": "error",
         "noForEach": "error",
         "useArrowFunction": "error",
-        "useOptionalChain": "error",
-        "useSimplifiedLogicExpression": "error"
+        "useOptionalChain": "error"
       }
     }
   },

@@ -8,11 +8,10 @@
   },
   "scripts": {
     "test": "npm run build:ts && tsc -p test/tsconfig.json && c8 node --test -r ts-node/register \"test/**/*.ts\"",
-    "start": "npm run build:ts && fastify start -l info dist/app.js",
-    "build:ts": "tsc",
-    "watch:ts": "tsc -w",
-    "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
-    "dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
+    "build": "swc src -d dist",
+    "build-dev": "npm run build && cross-env NODE_ENV=development node --inspect dist/index.js",
+    "dev": "nodemon --ext ts --exec \"npm run build-dev\"",
+    "start": "npm run build && cross-env NODE_ENV=production node dist/index.js",
     "lint": "npx biome check",
     "format": "npx biome format --write",
     "type-check": "tsc --noEmit",
@@ -24,6 +23,8 @@
   "dependencies": {
     "@fastify/autoload": "^6.0.0",
     "@fastify/sensible": "^6.0.0",
+    "@jubelio/service-base": "^1.33.0",
+    "elastic-apm-node": "^4.11.1",
     "fastify": "^5.0.0",
     "fastify-cli": "^7.3.0",
     "fastify-plugin": "^5.0.0"
@@ -44,7 +45,7 @@
     "concurrently": "^9.0.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.4.7",
     "fastify-tsconfig": "^2.0.0",
     "husky": "^9.1.7",
     "jest": "^27.4.7",
@@ -63,7 +64,6 @@
     "src/**/*.{ts,js,yml,yaml}": [
       "biome format --write",
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
-    ],
-    "*.{js,jsx,ts,tsx,css,md}": "prettier --write ."
+    ]
   }
 }

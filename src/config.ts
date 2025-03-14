@@ -1,0 +1,18 @@
+export default {
+	SERVER_HOST: process.env.SERVER_HOST || "localhost",
+	SERVER_PORT: process.env.SERVER_PORT || 8000,
+	JWT_SECRET: process.env.JWT_SECRET || "secret",
+	POOL_IDLE_TIMEOUT: process.env.POOL_IDLE_TIMEOUT || 60000,
+	TENANT_POOL_SIZE: process.env.TENANT_POOL_SIZE || 50,
+	SYSTEM_POOL_SIZE: process.env.SYSTEM_POOL_SIZE || 20,
+	SYSTEM_DB_PORT: process.env.SYSTEM_DB_PORT || 6432,
+	TENANT_DB_PORT: process.env.TENANT_DB_PORT || 6432,
+	ENABLE_LOG: process.env.ENABLE_LOG === undefined ? false : JSON.parse(process.env.ENABLE_LOG),
+	ES_API_KEY: process.env.LOGGING_PASSWORD || process.env.ES_API_KEY,
+	ES_LOG_ID: process.env.LOGGING_USERNAME || process.env.ES_LOG_ID,
+	ES_LOG_LEVEL: process.env.ES_LOG_LEVEL || "info",
+	ENABLE_APM: process.env.ENABLE_APM === undefined ? false : JSON.parse(process.env.ENABLE_APM),
+	SERVICE_NAME: process.env.SERVICE_NAME,
+	ES_NODENAME: process.env.ES_NODENAME || "service-contact_sync_contact",
+	ES_USE_PASSWORD: process.env.ES_USE_PASSWORD || false,
+};
